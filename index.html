@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>REmind</title>
+  <link rel="icon" type="image/x-icon" href="HealthHack\Bilder\IMG_6151.PNG">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <style>
+.flip-container {
+  perspective: 1000px;
+  width: 100%; /* Ensures the container takes the full width of the column */
+}
+
+/* This is where we define that the whole container is interactive */
+.flip-container:hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%; /* Ensures it matches the container's width */
+  height: 0;
+  padding-top: 100%; /* Creates a square aspect ratio */
+}
+
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Adds visual depth */
+}
+
+.front {
+  background-color: white; /* Set to your desired front color */
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  background-color: white; /* Match the front color */
+  transform: rotateY(180deg);
+  color: black;
+  padding: 20px; /* Optional padding for text formatting */
+}
+  </style>
+<style>
+/* Section with controlled image expansion and positioning */
+.hero-image-container {
+  position: relative; /* Needed for absolute positioning of the child */
+  overflow: hidden; /* Ensures content does not overflow its block */
+  height: 1000px; /* Adjust based on your design needs */
+}
+
+/* Image styling for controlled growth */
+.grow {
+  transition: transform 0.5s ease-in-out; /* Smooth transition for the transform */
+  transform: scale(0.4); /* Initial scale */
+  width: 100%; /* Cover the container */
+  height: 100%; /* Cover the container */
+  object-fit: cover; /* Preserve aspect ratio while filling the area */
+  position: absolute; /* Positioning it absolutely to stay in background */
+  z-index: 1; /* Ensure it stays behind the content */
+}
+
+/* Style for the content to be over the image */
+.content-over-image {
+  position: relative; /* Ensures it is positioned relative to its normal position */
+  z-index: 2; /* Higher index to be on top */
+  color: white; /* Example text color */
+}
+
+  .grow.visible {
+    transform: scale(0.9); /* Enlarged size */
+  }
+</style>
+<style>
+
+.team-flip-container:hover .flipper {
+  transform: rotateY(180deg);
+}
+
+/* Ensure that the flipper transitions smoothly */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+  /* Team Section Specific Styles */
+.team-flip-container {
+  width: 200px; /* width and height should be the same for a circle */
+  height: 200px;
+  border-radius: 50%; /* Make it circular */
+  overflow: hidden; /* Ensure nothing spills out of the circle */
+  margin: 10px; /* Space between each flip card */
+}
+
+.team-flipper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Make it circular */
+}
+
+/* Use this class for the images inside the cards */
+.team-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover; /* Ensures the image covers the circle */
+  backface-visibility: hidden; /* Important for proper flipping */
+}
+
+/* Styling front and back for circular flip cards */
+.team-front, .team-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backface-visibility: hidden; /* Hide the back when it's not faced up */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.team-back {
+  background-color: white; /* Optional: Different background for the back */
+  transform: rotateY(180deg);
+}
+
+.team-front {
+  background-color: white;
+  transform: rotateY(0deg);
+}
+
+</style>
+<style>
+
+/* Achievement Section Specific Styles */
+.achievement-flip-container {
+  width: 500px; /* Adjusted width for larger size */
+  height: 500px; /* Adjusted height for larger size */
+  border-radius: 50%; /* Keep it circular */
+  overflow: hidden; /* Ensure nothing spills out of the circle */
+  margin: auto; /* Center the container */
+  cursor: pointer; /* Indicates that the element is interactive */
+}
+
+.achievement-flip-container .flipper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Keep it circular */
+  position: relative; /* Ensure it's positioned relative to its container */
+  transition: transform 0.6s; /* Smooth transition for the transform */
+  transform-style: preserve-3d; /* Necessary for 3D transform */
+}
+
+.achievement-flip-container:hover .flipper {
+  transform: rotateY(180deg); /* Rotate element when hovered */
+}
+
+.achievement-flip-container .team-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Keep the image circular */
+  object-fit: cover; /* Ensure the image covers the area */
+}
+
+.achievement-flip-container .team-front,
+.achievement-flip-container .team-back {
+  position: absolute; /* Position absolutely within the flipper */
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back face on turn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.achievement-flip-container .team-back {
+  background-color: #f8f8f8; /* Light background for readability */
+  transform: rotateY(180deg); /* Rotate back face ready for flip */
+  color: black; /* Text color for back face */
+}
+
+.achievement-flip-container .team-front {
+  background-color: white;
+  transform: rotateY(0deg); /* Front face shown initially */
+}
+
+</style>
+<style>
+.puzzle-piece {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  margin: 50px;
+  overflow: hidden; /* Ensures protrusions do not affect layout */
+}
+
+/* Positive protrusions using a nested div */
+.protrusion::before,
+.protrusion::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* Right protruding circle */
+.protrusion::before {
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Bottom protruding circle */
+.protrusion::after {
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Negative indentations using puzzle-piece pseudo-elements */
+.puzzle-piece::before,
+.puzzle-piece::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #004364; /* Background color of the container */
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Top indented circle */
+.puzzle-piece::before {
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Left indented circle */
+.puzzle-piece::after {
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+</style>
+<script>
+  $(document).ready(function() {
+    $(window).scroll(function() {
+  $('.grow').each(function() {
+    var scrollTop = $(window).scrollTop();
+    var elementOffset = $(this).parent().offset().top;
+    var distance = (elementOffset - scrollTop);
+    var windowHeight = $(window).height();
+    var breakPoint = windowHeight * 0.1; // Sensitivity near the viewport edge
+    var scale = 1 + (1 - distance / windowHeight) * 0.1;
+    scale = Math.min(scale, 1.04); // Cap scale at 1.2
+    if (distance < windowHeight && distance > breakPoint) {
+        $(this).css('transform', 'scale(' + scale + ')');
+    }
+  });
+});
+
+
+  });
+  </script>
+
+</head>
+<body>
+
+  <section class="hero" style="background-color: #004364;">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title" style="color: #ffffff;">Because Every Memory Counts</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div style="display: flex; justify-content: center; align-items: center">
+        <!-- Adjust width and height in pixels or use CSS for more responsive design -->
+        <img src="HealthHack\Sheets, PDF, Proc\Logo Transp..png" width="2000" height="2000">
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Introducing the REMind brooch: a cutting-edge AI accessory equipped with a built-in vaporizer and a language model designed to leverage the Targeted Memory Reactivation (TMR) effect. This device activates emotional and declarative memories through precise olfactory and auditory stimuli, enhancing everyday memory function for everyone, not just individuals with cognitive impairments. REMind offers a unique way to improve daily life and memory retention for all users.
+        <br><br>REmind—Because every memory counts!
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+
+
+<section class="hero is-small" style="background-color: #cdffe2;">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-3">Targeted Memory Reactivation</h1>
+      <div class="columns is-variable is-0">
+        <div class="column is-4 rotate-box">
+          <div class="flip-container">
+            <div class="flipper">
+              <div class="front">
+                <h2 class="title is-3">Learning</h2>
+              </div>
+              <div class="back">
+                <p>A special auditory or olfactory cue can be linked with some new learning.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4 rotate-box">
+          <div class="flip-container">
+            <div class="flipper">
+              <div class="front">
+                <h2 class="title is-3">Sleep</h2>
+              </div>
+              <div class="back">
+                <p>If the same cue is presented during sleep, it can cause associated memories to be reactivated in the brain without causing awakening.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4 rotate-box">
+          <div class="flip-container">
+            <div class="flipper">
+              <div class="front">
+                <h2 class="title is-3">Remembering</h2>
+              </div>
+              <div class="back">
+                <p>Because memories were reactivated during sleep, memory storage in the brain becomes stronger, which helps with recalling information later.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero hero-image-container" style="background-color: #004364;">
+  <img src="HealthHack\Bilder\Untitled_Artwork_cropped.png" class="grow">
+  <div class="hero-body">
+    <div class="container content-over-image">
+      <h1 class="title is-3" style="color: #ffffff;">Vision</h1>
+    </div>
+  </div>
+</section>
+
+<section class="hero hero-image-container" style="background-color: #cdffe2;">
+  <img src="HealthHack\Bilder\IMG-20240427-WA0000.jpg" class="grow">
+  <div class="hero-body">
+    <div class="container content-over-image">
+      <h2 class="title is-3">Solution</h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small" style="background-color: #004364;">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-3" style="color: #ffffff;">App</h1>
+
+  </div>
+</div>
+</div>
+</section>
+
+
+<section class="hero is-small" style="background-color: #cdffe2;">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Team</h2>
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <div class="team-flip-container">
+            <div class="flipper">
+              <div class="team-front">
+                <img src="HealthHack\Bilder\Samu-removebg-preview.png" alt="Member 1" class="team-image">
+              </div>
+              <div class="team-back">
+                <b>Samuel</b>
+                <p>Neuroscientist</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-narrow">
+          <div class="team-flip-container">
+            <div class="flipper">
+              <div class="team-front">
+                <img src="HealthHack\Bilder\Maurice-removebg-preview.png" alt="Member 2" class="team-image">
+              </div>
+              <div class="team-back">
+                <b>Maurice</b>
+                <P>Product Designer</P>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-narrow">
+          <div class="team-flip-container">
+            <div class="flipper">
+              <div class="team-front">
+                <img src="HealthHack\Bilder\Micha-removebg-preview.png" alt="Member 3" class="team-image">
+              </div>
+              <div class="team-back">
+                <b>Michael</b>
+                <P>Business Developer</P>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-small" style="background-color: #004364;">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-3" style="color: #ffffff;">Achievement</h1>
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <div class="achievement-flip-container">
+            <div class="flipper">
+              <div class="team-front">
+                <img src="HealthHack\Bilder\achievement.jpg" alt="Achievement" class="team-image">
+              </div>
+              <div class="team-back">
+                <p>Lorem Ipsum</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">State of Research: The Impact of Targeted Memory Reactivation (TMR) on Declarative and Emotional Learning Processes</h2>
+      
+      <h2 class="subtitle has-text-centered">
+      <br>
+      <p>The role of sleep in the consolidation of emotional and declarative memories has gained increasing scientific interest, particularly regarding the potential of the Targeted Memory Reactivation (TMR) approach. TMR aims to selectively reactivate specific memory content during sleep to enhance its consolidation. This approach has found potential applications in treating mental disorders associated with fear generalization, improving social biases, and mitigating negative memories. This overview summarizes the current research on TMR and its impact on declarative and emotional learning processes.</p>
+      <br>
+      <b>Sleep Phases and TMR</b>
+      <p>Sleep is divided into REM (Rapid Eye Movement) and non-REM phases, with the latter further divided into light sleep (NonREM1 and NonREM2) and deep sleep (NonREM3, also known as Slow-Wave Sleep, SWS). While REM phases are mostly associated with dreaming, SWS is crucial for memory consolidation, supported by synchronized neural firing sequences that enhance memory consolidation.</p>
+      <br>
+      <b>Neurobiological Foundations and Mechanisms</b>
+      <p>The hippocampal region is central in modulating fear expression and differentiating between threats and safety. The dentate gyrus plays a key role in forming new memory representations to minimize overlap with previous memories. TMR during SWS has successfully activated brain-associated regions, including the left hippocampus and right parahippocampal cortex, highlighting their importance in memory reactivation.</p>
+      <br>
+      <b>Olfactory Cues as an Opportunity</b>
+      <p>TMR offers unique opportunities for the selective manipulation and enhancement of specific memory contents using auditory or olfactory cues. Olfactory cues, which are transmitted directly from the olfactory bulb to the hippocampus and amygdala, are particularly effective in reactivating declarative and emotional memory content.</p>
+      <br>
+      <b>Conclusion</b>
+      <p>In summary, TMR is a promising approach for enhancing memory consolidation during sleep, especially for declarative and emotional learning processes. While the effect of TMR on fear generalization requires further research, the existing findings provide important insights into the neurobiological bases of learning and memory consolidation. Future research should focus on understanding the specific mechanisms underlying TMR effects and how they can be utilized for therapeutic applications to treat mental disorders and promote well-being.</p>
+      <br>
+      <b>References</b>
+      <ul>
+        <li>Diekelmann, S., Büchel, C., Born, J., & Rasch, B. (2011). Labile or stable: Opposing consequences for memory when reactivated during waking and sleep. <em>Nature Neuroscience</em>, 14(3), 381–386. <a href="https://doi.org/10.1038/nn.2744">https://doi.org/10.1038/nn.2744</a></li>
+        <li>Rasch, B., Büchel, C., Gais, S., & Born, J. (2007). Odor Cues During Slow-Wave Sleep Prompt Declarative Memory Consolidation. <em>Science</em>, 315(5817), 1426–1429. <a href="https://doi.org/10.1126/science.1138581">https://doi.org/10.1126/science.1138581</a></li>
+        <li>Schouten, D. I., Pereira, S. I. R., Tops, M., & Louzada, F. M. (2017). State of the art on targeted memory reactivation: Sleep your way to enhanced cognition. <em>Sleep Medicine Reviews</em>, 32, 123–131. <a href="https://doi.org/10.1016/j.smrv.2016.04.002">https://doi.org/10.1016/j.smrv.2016.04.002</a></li>
+        <li>Yassa, M. A., & Stark, C. E. L. (2011). Pattern separation in the hippocampus. <em>Trends in Neurosciences</em>, 34(10), 515–525. <a href="https://doi.org/10.1016/j.tins.2011.06.006">https://doi.org/10.1016/j.tins.2011.06.006</a></li>
+        <li>Rudoy, J. D., Voss, J. L., Westerberg, C. E., & Paller, K. A. (2009). Strengthening Individual Memories by Reactivating Them During Sleep. <em>Science</em>, 326(5956), 1079. <a href="https://doi.org/10.1126/science.1179013">https://doi.org/10.1126/science.1179013</a></li>
+        <li>Zelano, C., & Sobel, N. (2005). Humans as an Animal Model for Systems-Level Organization of Olfaction. <em>Neuron</em>, 48(3), 431–454. <a href="https://doi.org/10.1016/j.neuron.2005.10.009">https://doi.org/10.1016/j.neuron.2005.10.009</a></li>
+      </ul>
+    </h2>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+            <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
