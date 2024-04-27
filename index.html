@@ -85,6 +85,11 @@
   color: black;
   padding: 20px; /* Optional padding for text formatting */
 }
+
+.back p {
+    font-size: 26px; /* Adjust font size as needed */
+    text-align: center; /* Centers the text if desired */
+  }
   </style>
 <style>
 /* Ensure the hero-image-container is positioned relatively with a default z-index lower than the App section */
@@ -305,9 +310,49 @@
   top: 50%;
   transform: translateY(-50%);
 }
+</style>
 
+<style>
+
+.app-section {
+  position: relative;
+  height:800px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.app-animate {
+  width: 100%; /* Adjust this to control the size of the image */
+  max-width: 300px; /* Max width can be adjusted for larger view */
+  height: auto;
+  position: absolute;
+  left: 50%; /* Centers the image horizontally */
+  transform: translateX(-50%) translateY(100%); /* Centers horizontally and starts from below */
+  transition: transform 0.5s ease;
+}
 
 </style>
+<script>
+$(document).ready(function() {
+  $(window).scroll(function() {
+    var windowHeight = $(window).height();
+    var scrollPos = $(window).scrollTop();
+    var elementPos = $('.app-section').offset().top;
+    var elementHeight = $('.app-section').height();
+    var delay = windowHeight * 0.3; // Adds a delay before the animation starts
+
+    var relativePos = (scrollPos + windowHeight - elementPos - delay) / (elementHeight + windowHeight + delay);
+    relativePos = Math.max(0, Math.min(1, relativePos)); // Clamps the value between 0 and 1
+
+    var translateY = 100 - (relativePos * 100); // Calculates the translate Y value
+    $('.app-animate').css('transform', 'translateX(-50%) translateY(' + translateY + '%)');
+  });
+});
+
+
+  </script>
+  
+  
 <script>
 $(document).ready(function() {
   $(window).scroll(function() {
@@ -437,9 +482,12 @@ $(document).ready(function() {
   <div class="hero-body">
     <div class="container">
       <h1 class="title is-3" style="color: #ffffff;">App</h1>
+      <img src="HealthHack\Bilder\app.png" class="app-animate">
     </div>
   </div>
 </section>
+
+
 
 
 
@@ -506,7 +554,7 @@ $(document).ready(function() {
                 <img src="HealthHack\Bilder\achievement.jpg" alt="Achievement" class="team-image">
               </div>
               <div class="team-back">
-                <p style="text-align: center;">REmind secured second place at HealthHack 2024, impressing judges with their innovative solution that enhances everyday memory function using targeted memory reactivation, leveraging auditory and olfactory cues.</p>
+                <p style="text-align: center;">REmind secured second place at HealthHack 2024, impressing judges with the innovative solution that enhances everyday memory function using targeted memory reactivation, leveraging auditory and olfactory cues.</p>
               </div>
             </div>
           </div>
