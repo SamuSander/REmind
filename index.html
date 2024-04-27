@@ -2,13 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
   <meta name="description" content="DESCRIPTION META TAG">
   <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
   <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
   <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <meta property="og:image" content="static/image/your_banner_image.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -16,10 +13,8 @@
 
   <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
   <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
   <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -92,34 +87,45 @@
 }
   </style>
 <style>
-/* Section with controlled image expansion and positioning */
+/* Ensure the hero-image-container is positioned relatively with a default z-index lower than the App section */
 .hero-image-container {
-  position: relative; /* Needed for absolute positioning of the child */
-  overflow: hidden; /* Ensures content does not overflow its block */
-  height: 1000px; /* Adjust based on your design needs */
+  position: relative;
+  overflow: visible;
+  height: auto;
+  min-height: 1000px;
+  z-index: 1;  /* Lower than the App section */
 }
 
-/* Image styling for controlled growth */
+/* Specific styles for the Solution section where the image is growing */
+.solution-section {
+  position: relative; /* Important if not already set */
+}
+
+/* Ensure the App section overlaps the Solution section */
+.app-section {
+  position: relative;  /* Important if not already set */
+  z-index: 10;  /* Higher than the Solution section to make sure it covers the image when it grows */
+}
+
+/* Styles for scaling images */
 .grow {
-  transition: transform 0.5s ease-in-out; /* Smooth transition for the transform */
-  transform: scale(0.4); /* Initial scale */
-  width: 100%; /* Cover the container */
-  height: 100%; /* Cover the container */
-  object-fit: cover; /* Preserve aspect ratio while filling the area */
-  position: absolute; /* Positioning it absolutely to stay in background */
-  z-index: 1; /* Ensure it stays behind the content */
+  transition: transform 0.5s ease-in-out;
+  transform: scale(0.7);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;  /* Ensure it's below the content in the same section */
 }
 
-/* Style for the content to be over the image */
-.content-over-image {
-  position: relative; /* Ensures it is positioned relative to its normal position */
-  z-index: 2; /* Higher index to be on top */
-  color: white; /* Example text color */
+.grow.visible {
+  transform: scale(1.5);
 }
 
-  .grow.visible {
-    transform: scale(0.9); /* Enlarged size */
-  }
+
+
 </style>
 <style>
 
@@ -303,24 +309,26 @@
 
 </style>
 <script>
-  $(document).ready(function() {
-    $(window).scroll(function() {
-  $('.grow').each(function() {
-    var scrollTop = $(window).scrollTop();
-    var elementOffset = $(this).parent().offset().top;
-    var distance = (elementOffset - scrollTop);
-    var windowHeight = $(window).height();
-    var breakPoint = windowHeight * 0.1; // Sensitivity near the viewport edge
-    var scale = 1 + (1 - distance / windowHeight) * 0.1;
-    scale = Math.min(scale, 1.04); // Cap scale at 1.2
-    if (distance < windowHeight && distance > breakPoint) {
+$(document).ready(function() {
+  $(window).scroll(function() {
+    $('.grow').each(function() {
+      var scrollTop = $(window).scrollTop(); // Current vertical scroll position
+      var elementOffset = $(this).parent().offset().top; // Distance of the image from the top of the document
+      var distance = (elementOffset - scrollTop); // Difference between the image's top and the current scroll position
+      var windowHeight = $(window).height(); // Height of the viewport
+      var breakPoint = windowHeight * 0.1; // 10% of the viewport height from the bottom
+
+      if (distance < windowHeight && distance > breakPoint) {
+        var visiblePercentage = (windowHeight - distance) / windowHeight;
+        var scale = 0.7 + (visiblePercentage * 0.5); // Calculate scale from 0.7 to 1.2
+        scale = Math.min(scale, 1.2); // Maximum scale limit set to 1.2 for better control
+
         $(this).css('transform', 'scale(' + scale + ')');
-    }
+      }
+    });
   });
 });
 
-
-  });
   </script>
 
 </head>
@@ -349,7 +357,7 @@
         <img src="HealthHack\Sheets, PDF, Proc\Logo Transp..png" width="2000" height="2000">
       </div>
       <h2 class="subtitle has-text-centered">
-        Introducing the REMind brooch: a cutting-edge AI accessory equipped with a built-in vaporizer and a language model designed to leverage the Targeted Memory Reactivation (TMR) effect. This device activates emotional and declarative memories through precise olfactory and auditory stimuli, enhancing everyday memory function for everyone, not just individuals with cognitive impairments. REMind offers a unique way to improve daily life and memory retention for all users.
+        Introducing the REmind brooch: a AI-powered accessory equipped with a built-in vaporizer and a language model designed to leverage the Targeted Memory Reactivation (TMR) effect. This device activates emotional and declarative memories through precise olfactory and auditory cues, enhancing everyday memory function for everyone, not just individuals with cognitive impairments. REMind offers a unique way to improve daily life and memory retention for all users.
         <br><br>REmind—Because every memory counts!
       </h2>
     </div>
@@ -362,13 +370,13 @@
 <section class="hero is-small" style="background-color: #cdffe2;">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-3">Targeted Memory Reactivation</h1>
+      <h1 class="title is-3" style="color: #004364;;">Targeted Memory Reactivation</h1>
       <div class="columns is-variable is-0">
         <div class="column is-4 rotate-box">
           <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <h2 class="title is-3">Learning</h2>
+                <h2 class="title is-3">Learn</h2>
               </div>
               <div class="back">
                 <p>A special auditory or olfactory cue can be linked with some new learning.</p>
@@ -392,7 +400,7 @@
           <div class="flip-container">
             <div class="flipper">
               <div class="front">
-                <h2 class="title is-3">Remembering</h2>
+                <h2 class="title is-3">Remember</h2>
               </div>
               <div class="back">
                 <p>Because memories were reactivated during sleep, memory storage in the brain becomes stronger, which helps with recalling information later.</p>
@@ -407,8 +415,7 @@
 </section>
 
 
-
-<section class="hero hero-image-container" style="background-color: #004364;">
+<section class="hero hero-image-container app-section" style="background-color: #004364;">
   <img src="HealthHack\Bilder\Untitled_Artwork_cropped.png" class="grow">
   <div class="hero-body">
     <div class="container content-over-image">
@@ -417,31 +424,30 @@
   </div>
 </section>
 
-<section class="hero hero-image-container" style="background-color: #cdffe2;">
+<section class="hero hero-image-container solution-section" style="background-color: #cdffe2;">
   <img src="HealthHack\Bilder\IMG-20240427-WA0000.jpg" class="grow">
   <div class="hero-body">
     <div class="container content-over-image">
-      <h2 class="title is-3">Solution</h2>
+      <h1 class="title is-3" style="color: #004364;">Solution</h1>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small app-section" style="background-color: #004364;">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-3" style="color: #ffffff;">App</h1>
     </div>
   </div>
 </section>
 
 
-<section class="hero is-small" style="background-color: #004364;">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title is-3" style="color: #ffffff;">App</h1>
-
-  </div>
-</div>
-</div>
-</section>
 
 
 <section class="hero is-small" style="background-color: #cdffe2;">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3">Team</h2>
+      <h1 class="title is-3" style="color: #004364;;">Team</h1>
       <div class="columns is-centered">
         <div class="column is-narrow">
           <div class="team-flip-container">
@@ -491,16 +497,16 @@
 <section class="hero is-small" style="background-color: #004364;">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title is-3" style="color: #ffffff;">Achievement</h1>
+      <h1 class="title is-3" style="color: #ffffff;">Achievements</h1>
       <div class="columns is-centered">
         <div class="column is-narrow">
-          <div class="achievement-flip-container">
+          <div class="achievement-flip-container" style="cursor: pointer;" onclick="window.location.href='https://metropolregion.de/gesundheit/flow-well-gewinnt-healthhack-2024-mit-idee-zur-verbesserten-bauplanung-in-krankenhaeusern/';">
             <div class="flipper">
               <div class="team-front">
                 <img src="HealthHack\Bilder\achievement.jpg" alt="Achievement" class="team-image">
               </div>
               <div class="team-back">
-                <p>Lorem Ipsum</p>
+                <p style="text-align: center;">REmind secured second place at HealthHack 2024, impressing judges with their innovative solution that enhances everyday memory function using targeted memory reactivation, leveraging auditory and olfactory cues.</p>
               </div>
             </div>
           </div>
@@ -509,6 +515,7 @@
     </div>
   </div>
 </section>
+
 
 
 
@@ -529,9 +536,6 @@
       <br>
       <b>Olfactory Cues as an Opportunity</b>
       <p>TMR offers unique opportunities for the selective manipulation and enhancement of specific memory contents using auditory or olfactory cues. Olfactory cues, which are transmitted directly from the olfactory bulb to the hippocampus and amygdala, are particularly effective in reactivating declarative and emotional memory content.</p>
-      <br>
-      <b>Conclusion</b>
-      <p>In summary, TMR is a promising approach for enhancing memory consolidation during sleep, especially for declarative and emotional learning processes. While the effect of TMR on fear generalization requires further research, the existing findings provide important insights into the neurobiological bases of learning and memory consolidation. Future research should focus on understanding the specific mechanisms underlying TMR effects and how they can be utilized for therapeutic applications to treat mental disorders and promote well-being.</p>
       <br>
       <b>References</b>
       <ul>
